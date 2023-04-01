@@ -1,0 +1,1 @@
+# shop_dj_test_task
