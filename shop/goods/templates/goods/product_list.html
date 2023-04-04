@@ -1,0 +1,25 @@
+<h2>Products</h2>
+{% for product in products %}
+<h2>{{ product.name }}</h2>
+<ul>
+    <li>{{ product.slug }}</li>
+    <li>{{ product.subcategory.parent_category }}</li>
+    <li>{{ product.subcategory.name }}</li>
+    <li>{{ product.price }}</li>
+    <li>{{ product.image_small }}</li>
+</ul>
+{% endfor %}
+{% if products.has_other_pages %}
+<div class="pagination">
+    <span class="step-links">
+        {% if products.has_previous %}
+            <a href="?page={{ categories.previous_page_number }}">previous</a>
+        {% endif %}
+        {% if products.has_next %}
+            <a href="?page={{ categories.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% else %}
+  <p>No more categories found.</p>
+{% endif %}
