@@ -1,0 +1,11 @@
+{% extends 'goods/base.html' %}
+{% block content %}
+<h1>{{cart}}</h1>
+{% for item in items %}
+    <li>{{item}}, добавлен [{{item.date_added}}] ( <a href="{% url 'add_to_cart' item.product.slug %}">+</a> | <a href="{% url 'remove_from_cart' item.id %}">-</a> ) </li>
+    {% endfor %}
+<h4>Всего {{cart.total_quantity}} товар(ов) на сумму {{cart.total_price}}</h4>
+{% if items %}
+    <a href="{% url 'remove_cart' %}">Очистить корзину</a>
+{% endif %}
+{% endblock content %}

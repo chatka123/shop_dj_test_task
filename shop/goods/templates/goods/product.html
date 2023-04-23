@@ -1,0 +1,12 @@
+{% extends 'goods/base.html' %}
+{% block content %}
+<h2>{{ product.name }}</h2>
+<ul>
+    <li>Slug: {{ product.slug }}</li>
+    <li>Category: {{ product.subcategory.parent_category }}</li>
+    <li>Name: {{ product.subcategory.name }}</li>
+    <li>Price: {{ product.price }}</li>
+    <li><a href="{% url 'add_to_cart' product_slug=product.slug %}">добавить в корзину</a></li>
+</ul>
+<img src="{{ product.image_medium.url }}">
+{% endblock content %}

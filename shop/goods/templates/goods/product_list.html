@@ -1,25 +1,29 @@
+{% extends 'goods/base.html' %}
+{% block content %}
 <h2>Products</h2>
-{% for product in products %}
-<h2>{{ product.name }}</h2>
+{% for product in page_obj %}
+<h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
 <ul>
-    <li>{{ product.slug }}</li>
-    <li>{{ product.subcategory.parent_category }}</li>
-    <li>{{ product.subcategory.name }}</li>
-    <li>{{ product.price }}</li>
-    <li>{{ product.image_small }}</li>
+    <li>Slug: {{ product.slug }}</li>
+    <li>Category: {{ product.subcategory.parent_category }}</li>
+    <li>Name: {{ product.subcategory.name }}</li>
+    <li>Price: {{ product.price }}</li>
+    <li><a href="{% url 'add_to_cart' product_slug=product.slug %}">добавить в корзину</a></li>
 </ul>
+<img src="{{ product.image_medium.url }}">
 {% endfor %}
-{% if products.has_other_pages %}
+{% if page_obj.has_other_pages %}
 <div class="pagination">
     <span class="step-links">
         {% if products.has_previous %}
-            <a href="?page={{ categories.previous_page_number }}">previous</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
         {% endif %}
         {% if products.has_next %}
-            <a href="?page={{ categories.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
         {% endif %}
     </span>
 </div>
 {% else %}
-  <p>No more categories found.</p>
+  <p>No more products found.</p>
 {% endif %}
+{% endblock content %}

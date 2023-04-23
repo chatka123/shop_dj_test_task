@@ -1,23 +1,26 @@
+{% extends 'goods/base.html' %}
+{% block content %}
 <h2>Categories</h2>
-{% for category in categories %}
+{% for category in page_obj %}
 <h4>{{ category.name }}</h4>
 {% for subcategory in category.subcategories.all %}
 <ul>
-    <li>{{ subcategory.name }}</li>
+    <li><a href="{{ subcategory.get_absolute_url }}">{{ subcategory.name }}</a></li>
 </ul>
 {% endfor %}
 {% endfor %}
-{% if categories.has_other_pages %}
+{% if page_obj.has_other_pages %}
 <div class="pagination">
     <span class="step-links">
-        {% if categories.has_previous %}
-            <a href="?page={{ categories.previous_page_number }}">previous</a>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
         {% endif %}
-        {% if categories.has_next %}
-            <a href="?page={{ categories.next_page_number }}">next</a>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
         {% endif %}
     </span>
 </div>
 {% else %}
   <p>No more categories found.</p>
 {% endif %}
+{% endblock content %}

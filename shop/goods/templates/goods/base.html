@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+<h1><a href="{% url 'index' %}">Главная страница</a>
+{% if request.user.is_authenticated %}
+    | здравствуйте {{request.user.username}}
+| <a href="{% url 'show_cart' %}">корзина</a> |  | <a href="{% url 'logout' %}">выход</a>
+    {% else %}
+    | <a href="{% url 'register' %}">Регистрация</a> или <a href="{% url 'login' %}">вход</a>
+{% endif %}</h1>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>
